@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POWER TORE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #020202;
+        padding: 20px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .title-container h1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #ee4d2d;
+        font-size: 45px;
+        margin: 0;
+    }
+
+    .favicon1 {
+        width: 60px;
+        height: 60px;
+    }
+
+    p {
+        font-size: 26px;
+        color: #fff;
+        margin-bottom: 1px;
+    }
+
+    /* ✅ CORREÇÃO PRINCIPAL: Grid com alinhamento uniforme */
+    .grid-produtos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: stretch; /* Força todas as células da linha terem a mesma altura */
+    }
+
+    /* ✅ CORREÇÃO: Card com altura 100% e layout flex coluna para equalizar */
+    .bloco-produto {
+        background: #030325;
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        height: 100%;
+        min-height: 280px; /* Altura mínima garantida para todos os cards */
+    }
+
+    /* ✅ CORREÇÃO: Imagem com aspect-ratio fixo — nunca distorce */
+    .bloco-produto img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        background-color: #ffffff;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        flex-shrink: 0; /* Impede que a imagem encolha */
+    }
+
+    /* ✅ CORREÇÃO: Título com altura fixa e clamp igual em todos */
+    .bloco-produto h3 {
+        font-size: 13px;
+        color: #cacad1;
+        line-height: 1.4;
+        height: 38px; /* Altura fixa exata para 2 linhas */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin-bottom: 8px;
+        flex-shrink: 0;
+    }
+
+    /* ✅ CORREÇÃO: Preço com margin-top: auto empurra para o rodapé */
+    .bloco-produto .preco {
+        font-size: 17px;
+        font-weight: bold;
+        color: #ee4d2d;
+        margin-top: auto;
+        margin-bottom: 10px;
+    }
+
+    .bloco-produto .btn-comprar {
+        display: block;
+        text-align: center;
+        background: #a0240b;
+        color: #fff;
+        text-decoration: none;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: bold;
+        transition: background 0.2s;
+        flex-shrink: 0;
+    }
+
+    .bloco-produto .btn-comprar:hover {
+        background: #d33b1d;
+    }
+
+    /* Mensagem de carregamento */
+    .msg-carregando {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: #666;
+        font-size: 18px !important;
+        padding: 40px 0;
+    }
+
+    @media (min-width: 768px) {
+        .grid-produtos {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="title-container">
+            <h1>
+                <span>POWER</span>
+                <img src="https://favicon.im/shopee.com.br" alt="shopee.com.br favicon" class="favicon1" />
+                <span>TORE</span>
+            </h1>
+        </div>
+        <p>As melhores ofertas com estoque verificado</p>
+    </header>
+
+    <main class="grid-produtos" id="vitrine-produtos">
+        <p class="msg-carregando">Carregando ofertas exclusivas...</p>
+    </main>
+
+    <script>
+        const SUPABASE_URL = "https://vzpzbjnakzbnkksfpatl.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_MezbGHiL8dv5qGqWX-ZikQ_GNmJ7TAk";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function buscarProdutos() {
+            const { data: produtos, error } = await _supabase
+                .from('produtos')
+                .select('*')
+                .order('preco', { ascending: true });
+
+            if (error) {
+                console.error("Erro ao buscar produtos:", error);
+                document.getElementById('vitrine-produtos').innerHTML =
+                    '<p class="msg-carregando">Erro ao carregar produtos. Tente novamente.</p>';
+                return;
+            }
+
+            renderizarNaTela(produtos);
+        }
+
+        // ✅ CORREÇÃO: Verifica se a imagem carrega antes de exibir o card.
+        //   Se a imagem quebrar (onerror), remove o card inteiro do DOM —
+        //   assim o próximo produto é exibido no lugar e o grid não fica vazio.
+        function renderizarNaTela(lista) {
+            const container = document.getElementById('vitrine-produtos');
+            container.innerHTML = '';
+
+            lista.forEach(prod => {
+                const bloco = document.createElement('div');
+                bloco.className = 'bloco-produto';
+
+                const precoFormatado = 'R$ ' + prod.preco.toFixed(2).replace('.', ',');
+                const tituloSeguro = prod.titulo.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+                bloco.innerHTML = `
+                    <img
+                        src="${prod.imagem_url}"
+                        alt="${tituloSeguro}"
+                        onerror="this.closest('.bloco-produto').remove()"
+                        loading="lazy"
+                    >
+                    <h3>${tituloSeguro}</h3>
+                    <div class="preco">${precoFormatado}</div>
+                    <a href="${prod.link_afiliado}" target="_blank" rel="noopener" class="btn-comprar">Quero Ver</a>
+                `;
+
+                container.appendChild(bloco);
+            });
+
+            // Se nenhum produto foi renderizado
+            if (container.children.length === 0) {
+                container.innerHTML = '<p class="msg-carregando">Nenhuma oferta disponível no momento.</p>';
+            }
+        }
+
+        buscarProdutos();
+    </script>
+</body>
+</html>
