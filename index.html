@@ -223,5 +223,27 @@
 
         buscarProdutos();
     </script>
+
+
+
+
+
+<script>
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12' || e.keyCode === 123) { // Verifica a tecla F12 por key ou keyCode
+    e.preventDefault();
+    return false; // Evita a propagação do evento
+  }
+});
+
+</script>
+
+
+
+
 </body>
 </html>
