@@ -4,36 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Power Store 2 - Os Melhores Achados da Shopee com Desconto</title>
+    <title>Power Store 2 - Os Melhores Achados com Desconto</title>
     <link rel="canonical" href="https://powerstore2.netlify.app/">
     <meta property="og:url" content="https://powerstore2.netlify.app/">
     <meta name="twitter:url" content="https://powerstore2.netlify.app/">
     
-    <meta name="description" content="Encontre os melhores achados da Shopee selecionados a dedo. Produtos inteligentes, úteis e inovadores com descontos e os menores preços do mercado!">
-    <meta name="keywords" content="achados da shopee, achadinhos shopee, produtos inteligentes, promoções shopee, power store">
+    <meta name="description" content="Encontre os melhores achados selecionados a dedo. Produtos inteligentes, úteis e inovadores com descontos e os menores preços do mercado!">
+    <meta name="keywords" content="achados, produtos inteligentes, promoções, power store">
     <meta name="robots" content="index, follow">
     
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="Power Store 2">
-    <meta property="og:url" content="https://powerstore2.netlify.app/">
-    <meta property="og:title" content="Power Store 2 - Achados da Shopee">
-    <meta property="og:description" content="Os melhores achadinhos e produtos inteligentes recomendados da Shopee com desconto real.">
+    <meta property="og:title" content="Power Store 2 - Os Melhores Achados">
+    <meta property="og:description" content="Os melhores achadinhos e produtos inteligentes recomendados com desconto real.">
     <meta property="og:image" content="./image/favicon.png">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://powerstore2.netlify.app/">
-    <meta name="twitter:title" content="Power Store 2 - Achados da Shopee">
-    <meta name="twitter:description" content="Os melhores achadinhos e produtos inteligentes recomendados da Shopee com desconto real.">
+    <meta name="twitter:title" content="Power Store 2 - Os Melhores Achados">
+    <meta name="twitter:description" content="Os melhores achadinhos e produtos inteligentes recomendados com desconto real.">
     <meta name="twitter:image" content="./image/favicon.png">
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Power Store 2",
       "url": "https://powerstore2.netlify.app/",
-      "description": "Os melhores achados da Shopee selecionados a dedo.",
+      "description": "Os melhores achados selecionados a dedo.",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://powerstore2.netlify.app/?search={search_term_string}",
@@ -51,21 +50,16 @@
             --bg-color: #121212;
             --text-color: #f8f9fa;
             --header-bg: #1359ee48;
-            --card-bg: #2d2d2d;
+            --card-bg: #000000;
             --card-border: #444444;
-            --button-bg: #0d6efd;
-            --button-text: #ffffff;
-            --nav-bg: #343a40;
-            --nav-text: #f8f9fa;
-            --primary-color: #ff6b35;
+            --primary-color: #ff6b35; /* Laranja Power */
             --secondary-color: #ff3535;
             --tertiary-color: #35a2ff;
             --quaternary-color: #35ff6b;
-            --quinary-color: #ffd700;
+            --quinary-color: #ffd700; /* Amarelo Ouro */
             --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
  
-        /* REMOVIDO O USER-SELECT:NONE DO * PARA MELHORAR ACESSIBILIDADE E SEO */
         * {
             margin: 0;
             padding: 0;
@@ -78,7 +72,6 @@
             color: var(--text-color);
             line-height: 1.4;
             min-height: 100vh;
-            /* PERFORMANCE: Removido o bg.gif global pesado que destruía a renderização */
         }
  
         header {
@@ -107,7 +100,11 @@
             border: 0;
         }
 
-        /* CORREÇÃO DO H2: Estilização do novo título semântico */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+ 
         .section-title {
             text-align: center;
             margin: 2rem 0 0;
@@ -123,13 +120,13 @@
             padding: 1.5rem 1rem;
         }
  
+        /* O CONTAINER DO CARD MANTÉM O TAMANHO PADRÃO */
         .ad-container {
-            background-color: #000000;
+            background-color: var(--card-bg);
             border: 2px solid var(--card-border);
             border-radius: 12px;
             height: 480px;
             overflow: hidden;
-            /* PERFORMANCE: Transição aplicada estritamente onde precisa, em vez do '*' */
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
  
@@ -147,39 +144,47 @@
             flex-direction: column;
         }
 
+        /* 75% DE ESPAÇO PARA VALORIZAR A IMAGEM */
         .product-image-wrap {
             width: 100%;
-            height: 65%;
+            height: 75%;
             background-color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
-            border-bottom: 1px solid var(--card-border);
+            overflow: hidden;
+            position: relative;
         }
 
+        /* ZOOM INTELIGENTE QUE SE ADAPTA PERFEITAMENTE SEM ESPAÇOS VAZIOS */
         .product-image-wrap img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.03);
+            transition: transform 0.3s ease;
+        }
+
+        .ad-container:hover .product-image-wrap img {
+            transform: scale(1.10);
         }
  
+        /* 25% DE TEXTO (MARGEM PRETA TOTALMENTE OTIMIZADA E REDUZIDA) */
         .product-info-wrap {
             width: 100%;
-            height: 35%;
+            height: 25%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            background-color: #000000;
-            padding: 12px;
-            gap: 6px;
+            justify-content: space-between;
+            padding: 8px 12px;
+            gap: 2px;
         }
  
         .product-title {
             color: #ffffff;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-align: center;
             width: 100%;
             display: -webkit-box;
@@ -188,31 +193,36 @@
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 1.2;
-            height: 2.4em;
+        }
+
+        /* LINHA DE BAIXO COMPACTA COM PREÇO E O IDENTIFICADOR DO CARD */
+        .product-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 2px;
         }
  
         .product-price {
-            color: var(--primary-color);
-            font-size: 1.5rem;
+            color: var(--quinary-color); /* Amarelo Ouro destacado no fundo preto */
+            font-size: 1.3rem;
             font-weight: bold;
             margin: 0;
             line-height: 1;
         }
- 
-        .product-description {
-            color: #bbbbbb;
-            font-size: 0.8rem;
-            margin: 0;
-            font-weight: normal;
-            text-align: center;
-            width: 100%;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.2;
-            height: 3.6em;
+
+        /* ETIQUETA SINALIZADORA DE IDENTIFICAÇÃO DO CARD */
+        .card-id-badge {
+            background: var(--primary-color);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
         }
  
         .loading {
@@ -231,6 +241,11 @@
             font-size: 0.9rem;
             color: #888888;
         }
+
+        /* BARRA SUSPENSA TOTALMENTE PERSISTENTE E EXCLUSIVA PARA SMARTPHONES */
+        .sticky-mobile-bar {
+            display: none;
+        }
  
         @media (max-width: 600px) {
             .ads-grid {
@@ -238,7 +253,57 @@
                 gap: 1rem;
             }
             .ad-container {
-                height: 450px;
+                height: 480px;
+            }
+
+            /* Ativação da barra suspensa flutuante na tela mobile */
+            .sticky-mobile-bar {
+                display: block;
+                position: fixed;
+                bottom: 20px;
+                left: 5%;
+                width: 90%;
+                height: 60px;
+                background-color: #1358ee2f; /* Fundo Azul */
+                border: 2px solid var(--primary-color); /* Borda Laranja */
+                border-radius: 8px;
+                z-index: 9999;
+                box-shadow: 0 4px 15px rgba(6, 9, 206, 0.342);
+            }
+
+            .sticky-bar-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 100%;
+                padding: 0 15px;
+            }
+
+            .sticky-controls {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            /* Seletor de roleta nativo que abre o disco de números ao toque */
+            #cardPositionInput {
+                width: 85px;
+                height: 38px;
+                background: #0000008a;
+                border: 2px solid var(--quinary-color);
+                color: #ffffff;
+                text-align: center;
+                font-size: 1.1rem;
+                border-radius: 6px;
+                font-weight: bold;
+                padding: 0 5px;
+                cursor: pointer;
+                outline: none;
+            }
+
+            .sticky-bar-logo {
+                height: 30px;
+                width: auto;
             }
         }
     </style>
@@ -246,28 +311,40 @@
  
 <body>
     <header>
-        <h1 class="sr-only">Power Store 2 - Melhores Achados e Promoções Shopee</h1>
-        <img src="./image/plog.png" alt="Logo Power Store - Achados Shopee" style="height: 40px; width: auto;">
+        <h1 class="sr-only">Power Store 2 - Melhores Achados e Promoções</h1>
+        <img src="./image/plog.png" alt="Logo Power Store - Achados" style="height: 40px; width: auto;">
     </header>
  
     <main class="container">
-        <h2 class="section-title">🔥 Achados em Destaque do Dia</h2>
+        <h2 class="section-title"> Achados em Destaque do Dia🔥</h2>
         
         <div class="ads-grid" id="adsGrid">
-            <div class="loading">🔍 Carregando ofertas Shopee...</div>
+            <div class="loading">🔍 Carregando ofertas...</div>
         </div>
     </main>
  
+    <div id="stickySelectorBar" class="sticky-mobile-bar">
+        <div class="sticky-bar-container">
+            <div class="sticky-controls">
+                <select id="cardPositionInput" onchange="irParaCardAutomatico()">
+                    <option value="1"># 1</option>
+                </select>
+                <span style="font-size: 0.85rem; color: #ffffff; font-weight: bold;">IR PARA O CARD</span>
+            </div>
+            <img src="./image/plog.png" alt="Power Logo" class="sticky-bar-logo">
+        </div>
+    </div>
+
     <footer>
         <p>© 2026 Power Store 2. Todos os direitos reservados erbj.</p>
     </footer>
  
-    <script>
+   <script>
         const SUPABASE_URL = "https://vzpzbjnakzbnkksfpatl.supabase.co";
         const SUPABASE_KEY = "sb_publishable_MezbGHiL8dv5qGqWX-ZikQ_GNmJ7TAk";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
  
-        // SEGURANÇA (Anti-XSS): Função para impedir que códigos maliciosos injetados quebrem seu site
+        // SEGURANÇA (Anti-XSS)
         function escaparHTML(string) {
             if (!string) return '';
             return string
@@ -296,6 +373,7 @@
  
         function renderShopeeAds(lista) {
             const adsGrid = document.getElementById('adsGrid');
+            const seletorLista = document.getElementById('cardPositionInput');
  
             if (!lista || lista.length === 0) {
                 adsGrid.innerHTML = '<div class="loading">📭 Nenhuma oferta disponível.</div>';
@@ -303,73 +381,67 @@
             }
  
             let htmlContent = '';
+            let seletorOptions = ''; 
  
-            lista.forEach((prod) => {
+            lista.forEach((prod, index) => {
+                const numeroDoCard = index + 1;
                 const bannerImg   = prod.imagem_url   || './image/favicon.png';
-                
-                // Aplicando higienização de strings para proteção contra invasões
                 const titulo      = escaparHTML(prod.titulo || 'Produto').toUpperCase();
-                const descricao   = escaparHTML(prod.descricao || '');
                 const link        = prod.link_afiliado || '#';
                 
                 const precoRender = prod.preco != null
-                    ? `<p class="product-price">R$ ${prod.preco.toFixed(2).replace('.', ',')}</p>`
-                    : '';
+                    ? `R$ ${prod.preco.toFixed(2).replace('.', ',')}`
+                    : 'Grátis';
  
-                const descRender = descricao
-                    ? `<p class="product-description">${descricao}</p>`
-                    : '<div style="height:3.6em;"></div>';
+                // Alimenta dinamicamente as opções da roleta de rolagem com base no total de dados salvos
+                seletorOptions += `<option value="${numeroDoCard}"># ${numeroDoCard}</option>`;
  
-                // CORE WEB VITALS: Adicionado loading="lazy", width e height fixos na imagem para evitar oscilações de layout (CLS)
+                // MONTAGEM DO CARD COM FOCO 75% NA IMAGEM E SINALIZAÇÃO DO CARD
                 htmlContent += `
-                <article class="ad-container">
+                <article class="ad-container" id="card-${numeroDoCard}">
                     <a href="${link}" target="_blank" rel="sponsored noopener" class="ad-link">
  
                         <div class="product-image-wrap">
-                            <img src="${bannerImg}" alt="Achado Shopee: ${titulo}"
+                            <img src="${bannerImg}" alt="Achado Power Store: ${titulo}"
                                  loading="lazy" width="300" height="300"
-                                 onerror="this.closest('.ad-container').remove()">
+                                 onerror="this.onerror=null; this.src='./image/favicon.png';">
                         </div>
  
                         <div class="product-info-wrap">
                             <div style="width:100%;">
                                 <h3 class="product-title">🛍️ ${titulo}</h3>
                             </div>
-                            ${precoRender}
-                            ${descRender}
+                            
+                            <div class="product-footer-row">
+                                <p class="product-price">${precoRender}</p>
+                                <span class="card-id-badge">CARD ${numeroDoCard}</span>
+                            </div>
                         </div>
                     </a>
                 </article>`;
             });
  
             adsGrid.innerHTML = htmlContent;
+
+            // Injeta as opções numéricas geradas na roleta da barra mobile
+            if (seletorLista) {
+                seletorLista.innerHTML = seletorOptions;
+            }
+        }
+
+        /* FUNÇÃO DE SISTEMA: Intercepta a seleção da roleta, fecha o painel e faz o scroll suave até o alvo */
+        function irParaCardAutomatico() {
+            const seletor = document.getElementById('cardPositionInput');
+            const posicaoSelecionada = seletor.value;
+            const elementoAlvo = document.getElementById(`card-${posicaoSelecionada}`);
+            
+            if (elementoAlvo) {
+                // Executa a rolagem automática centralizando milimetricamente o card na tela do celular
+                elementoAlvo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
  
         buscarProdutos();
-    </script>
- 
-    <script>
-        const THEMES = ['dark', 'light', 'purple', 'green'];
-        let currentThemeIndex = 0;
- 
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            currentThemeIndex = THEMES.indexOf(savedTheme);
-            if (currentThemeIndex === -1) currentThemeIndex = 0;
-            document.documentElement.setAttribute('data-theme', THEMES[currentThemeIndex]);
-        }
- 
-        loadTheme();
-    </script>
- 
-    <script>
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || e.keyCode === 123) {
-                e.preventDefault();
-                return false;
-            }
-        });
     </script>
 </body>
 </html>
