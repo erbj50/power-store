@@ -3,247 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POWER TORE</title>
+    
+    <title>Power Store 2 - Os Melhores Achados da Shopee com Desconto</title>
+    <link rel="canonical" href="https://powerstore2.netlify.app/">
+    <meta property="og:url" content="https://powerstore2.netlify.app/">
+    <meta name="twitter:url" content="https://powerstore2.netlify.app/">
+    
+    <meta name="description" content="Encontre os melhores achados da Shopee selecionados a dedo. Produtos inteligentes, úteis e inovadores com descontos e os menores preços do mercado!">
+    <meta name="keywords" content="achados da shopee, achadinhos shopee, produtos inteligentes, promoções shopee, power store">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Power Store 2">
+    <meta property="og:url" content="https://powerstore2.netlify.app/">
+    <meta property="og:title" content="Power Store 2 - Achados da Shopee">
+    <meta property="og:description" content="Os melhores achadinhos e produtos inteligentes recomendados da Shopee com desconto real.">
+    <meta property="og:image" content="./image/favicon.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://powerstore2.netlify.app/">
+    <meta name="twitter:title" content="Power Store 2 - Achados da Shopee">
+    <meta name="twitter:description" content="Os melhores achadinhos e produtos inteligentes recomendados da Shopee com desconto real.">
+    <meta name="twitter:image" content="./image/favicon.png">
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Power Store 2",
+      "url": "https://powerstore2.netlify.app/",
+      "description": "Os melhores achados da Shopee selecionados a dedo.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://powerstore2.netlify.app/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <link rel="icon" type="image/png" sizes="96x96" href="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/icon_favicon_1_96.1ce0e05fc18a86e5.png">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-        background-color: #020202;
-        padding: 20px;
-    }
-
-    header {
-        text-align: center;
-        margin-bottom: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .title-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-
-    .title-container h1 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        color: #ee4d2d;
-        font-size: 45px;
-        margin: 0;
-    }
-
-    .favicon1 {
-        width: 60px;
-        height: 60px;
-    }
-
-    p {
-        font-size: 26px;
-        color: #fff;
-        margin-bottom: 1px;
-    }
-
-    /* ✅ CORREÇÃO PRINCIPAL: Grid com alinhamento uniforme */
-    .grid-produtos {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        max-width: 1200px;
-        margin: 0 auto;
-        align-items: stretch; /* Força todas as células da linha terem a mesma altura */
-    }
-
-    /* ✅ CORREÇÃO: Card com altura 100% e layout flex coluna para equalizar */
-    .bloco-produto {
-        background: #030325;
-        border-radius: 8px;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        height: 100%;
-        min-height: 280px; /* Altura mínima garantida para todos os cards */
-    }
-
-    /* ✅ CORREÇÃO: Imagem com aspect-ratio fixo — nunca distorce */
-    .bloco-produto img {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: contain;
-        background-color: #ffffff;
-        border-radius: 6px;
-        margin-bottom: 10px;
-        flex-shrink: 0; /* Impede que a imagem encolha */
-    }
-
-    /* ✅ CORREÇÃO: Título com altura fixa e clamp igual em todos */
-    .bloco-produto h3 {
-        font-size: 13px;
-        color: #cacad1;
-        line-height: 1.4;
-        height: 38px; /* Altura fixa exata para 2 linhas */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        margin-bottom: 8px;
-        flex-shrink: 0;
-    }
-
-    /* ✅ CORREÇÃO: Preço com margin-top: auto empurra para o rodapé */
-    .bloco-produto .preco {
-        font-size: 17px;
-        font-weight: bold;
-        color: #ee4d2d;
-        margin-top: auto;
-        margin-bottom: 10px;
-    }
-
-    .bloco-produto .btn-comprar {
-        display: block;
-        text-align: center;
-        background: #a0240b;
-        color: #fff;
-        text-decoration: none;
-        padding: 8px;
-        border-radius: 4px;
-        font-size: 13px;
-        font-weight: bold;
-        transition: background 0.2s;
-        flex-shrink: 0;
-    }
-
-    .bloco-produto .btn-comprar:hover {
-        background: #d33b1d;
-    }
-
-    /* Mensagem de carregamento */
-    .msg-carregando {
-        grid-column: 1 / -1;
-        text-align: center;
-        color: #666;
-        font-size: 18px !important;
-        padding: 40px 0;
-    }
-
-    @media (min-width: 768px) {
-        .grid-produtos {
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+    <link rel="icon" href="./image/favicon.png" type="image/png">
+ 
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --header-bg: #1359ee48;
+            --card-bg: #2d2d2d;
+            --card-border: #444444;
+            --button-bg: #0d6efd;
+            --button-text: #ffffff;
+            --nav-bg: #343a40;
+            --nav-text: #f8f9fa;
+            --primary-color: #ff6b35;
+            --secondary-color: #ff3535;
+            --tertiary-color: #35a2ff;
+            --quaternary-color: #35ff6b;
+            --quinary-color: #ffd700;
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    }
-  </style>
+ 
+        /* REMOVIDO O USER-SELECT:NONE DO * PARA MELHORAR ACESSIBILIDADE E SEO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.4;
+            min-height: 100vh;
+            /* PERFORMANCE: Removido o bg.gif global pesado que destruía a renderização */
+        }
+ 
+        header {
+            background-color: var(--header-bg);
+            height: 60px;
+            padding: 0 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.164);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* CORREÇÃO DO H2: Estilização do novo título semântico */
+        .section-title {
+            text-align: center;
+            margin: 2rem 0 0;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+ 
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem 1rem;
+        }
+ 
+        .ad-container {
+            background-color: #000000;
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            height: 480px;
+            overflow: hidden;
+            /* PERFORMANCE: Transição aplicada estritamente onde precisa, em vez do '*' */
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+ 
+        .ad-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+            border-color: var(--primary-color);
+        }
+ 
+        .ad-link {
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-image-wrap {
+            width: 100%;
+            height: 65%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .product-image-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+ 
+        .product-info-wrap {
+            width: 100%;
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #000000;
+            padding: 12px;
+            gap: 6px;
+        }
+ 
+        .product-title {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-align: center;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            height: 2.4em;
+        }
+ 
+        .product-price {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+            line-height: 1;
+        }
+ 
+        .product-description {
+            color: #bbbbbb;
+            font-size: 0.8rem;
+            margin: 0;
+            font-weight: normal;
+            text-align: center;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            height: 3.6em;
+        }
+ 
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.5rem;
+            color: var(--quinary-color);
+            grid-column: 1 / -1;
+        }
+ 
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--secondary-color);
+            font-size: 0.9rem;
+            color: #888888;
+        }
+ 
+        @media (max-width: 600px) {
+            .ads-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .ad-container {
+                height: 450px;
+            }
+        }
+    </style>
 </head>
+ 
 <body>
     <header>
-        <div class="title-container">
-            <h1>
-                <span>POWER</span>
-                <img src="https://favicon.im/shopee.com.br" alt="shopee.com.br favicon" class="favicon1" />
-                <span>TORE</span>
-            </h1>
-        </div>
-        <p>As melhores ofertas com estoque verificado</p>
+        <h1 class="sr-only">Power Store 2 - Melhores Achados e Promoções Shopee</h1>
+        <img src="./image/plog.png" alt="Logo Power Store - Achados Shopee" style="height: 40px; width: auto;">
     </header>
-
-    <main class="grid-produtos" id="vitrine-produtos">
-        <p class="msg-carregando">Carregando ofertas exclusivas...</p>
+ 
+    <main class="container">
+        <h2 class="section-title">🔥 Achados em Destaque do Dia</h2>
+        
+        <div class="ads-grid" id="adsGrid">
+            <div class="loading">🔍 Carregando ofertas Shopee...</div>
+        </div>
     </main>
-
+ 
+    <footer>
+        <p>© 2026 Power Store 2. Todos os direitos reservados erbj.</p>
+    </footer>
+ 
     <script>
         const SUPABASE_URL = "https://vzpzbjnakzbnkksfpatl.supabase.co";
         const SUPABASE_KEY = "sb_publishable_MezbGHiL8dv5qGqWX-ZikQ_GNmJ7TAk";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+ 
+        // SEGURANÇA (Anti-XSS): Função para impedir que códigos maliciosos injetados quebrem seu site
+        function escaparHTML(string) {
+            if (!string) return '';
+            return string
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
 
         async function buscarProdutos() {
             const { data: produtos, error } = await _supabase
                 .from('produtos')
                 .select('*')
                 .order('preco', { ascending: true });
-
+ 
             if (error) {
                 console.error("Erro ao buscar produtos:", error);
-                document.getElementById('vitrine-produtos').innerHTML =
-                    '<p class="msg-carregando">Erro ao carregar produtos. Tente novamente.</p>';
+                document.getElementById('adsGrid').innerHTML =
+                    '<div class="loading">❌ Erro ao carregar ofertas. Tente novamente.</div>';
                 return;
             }
-
-            renderizarNaTela(produtos);
+ 
+            renderShopeeAds(produtos);
         }
-
-        // ✅ CORREÇÃO: Verifica se a imagem carrega antes de exibir o card.
-        //   Se a imagem quebrar (onerror), remove o card inteiro do DOM —
-        //   assim o próximo produto é exibido no lugar e o grid não fica vazio.
-        function renderizarNaTela(lista) {
-            const container = document.getElementById('vitrine-produtos');
-            container.innerHTML = '';
-
-            lista.forEach(prod => {
-                const bloco = document.createElement('div');
-                bloco.className = 'bloco-produto';
-
-                const precoFormatado = 'R$ ' + prod.preco.toFixed(2).replace('.', ',');
-                const tituloSeguro = prod.titulo.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-                bloco.innerHTML = `
-                    <img
-                        src="${prod.imagem_url}"
-                        alt="${tituloSeguro}"
-                        onerror="this.closest('.bloco-produto').remove()"
-                        loading="lazy"
-                    >
-                    <h3>${tituloSeguro}</h3>
-                    <div class="preco">${precoFormatado}</div>
-                    <a href="${prod.link_afiliado}" target="_blank" rel="noopener" class="btn-comprar">Quero Ver</a>
-                `;
-
-                container.appendChild(bloco);
-            });
-
-            // Se nenhum produto foi renderizado
-            if (container.children.length === 0) {
-                container.innerHTML = '<p class="msg-carregando">Nenhuma oferta disponível no momento.</p>';
+ 
+        function renderShopeeAds(lista) {
+            const adsGrid = document.getElementById('adsGrid');
+ 
+            if (!lista || lista.length === 0) {
+                adsGrid.innerHTML = '<div class="loading">📭 Nenhuma oferta disponível.</div>';
+                return;
             }
+ 
+            let htmlContent = '';
+ 
+            lista.forEach((prod) => {
+                const bannerImg   = prod.imagem_url   || './image/favicon.png';
+                
+                // Aplicando higienização de strings para proteção contra invasões
+                const titulo      = escaparHTML(prod.titulo || 'Produto').toUpperCase();
+                const descricao   = escaparHTML(prod.descricao || '');
+                const link        = prod.link_afiliado || '#';
+                
+                const precoRender = prod.preco != null
+                    ? `<p class="product-price">R$ ${prod.preco.toFixed(2).replace('.', ',')}</p>`
+                    : '';
+ 
+                const descRender = descricao
+                    ? `<p class="product-description">${descricao}</p>`
+                    : '<div style="height:3.6em;"></div>';
+ 
+                // CORE WEB VITALS: Adicionado loading="lazy", width e height fixos na imagem para evitar oscilações de layout (CLS)
+                htmlContent += `
+                <article class="ad-container">
+                    <a href="${link}" target="_blank" rel="sponsored noopener" class="ad-link">
+ 
+                        <div class="product-image-wrap">
+                            <img src="${bannerImg}" alt="Achado Shopee: ${titulo}"
+                                 loading="lazy" width="300" height="300"
+                                 onerror="this.closest('.ad-container').remove()">
+                        </div>
+ 
+                        <div class="product-info-wrap">
+                            <div style="width:100%;">
+                                <h3 class="product-title">🛍️ ${titulo}</h3>
+                            </div>
+                            ${precoRender}
+                            ${descRender}
+                        </div>
+                    </a>
+                </article>`;
+            });
+ 
+            adsGrid.innerHTML = htmlContent;
         }
-
+ 
         buscarProdutos();
     </script>
-
-
-
-
-
-<script>
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-});
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'F12' || e.keyCode === 123) { // Verifica a tecla F12 por key ou keyCode
-    e.preventDefault();
-    return false; // Evita a propagação do evento
-  }
-});
-
-</script>
-
-
-
-
+ 
+    <script>
+        const THEMES = ['dark', 'light', 'purple', 'green'];
+        let currentThemeIndex = 0;
+ 
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            currentThemeIndex = THEMES.indexOf(savedTheme);
+            if (currentThemeIndex === -1) currentThemeIndex = 0;
+            document.documentElement.setAttribute('data-theme', THEMES[currentThemeIndex]);
+        }
+ 
+        loadTheme();
+    </script>
+ 
+    <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </body>
 </html>
